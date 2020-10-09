@@ -1,6 +1,5 @@
     def channel_attention(self, input_feature, index, ratio=0.125):
         channel = int(input_feature.shape[1])
-        # 共享权值
         size = int(channel * ratio)
         size = 1 if size < 1 else size
         # avg path
