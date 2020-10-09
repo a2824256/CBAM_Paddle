@@ -4,7 +4,6 @@
         size = 1 if size < 1 else size
         # avg path
         avg_path = fluid.layers.pool2d(name='cbam_avg_pooling_' + str(index), input=input_feature, global_pooling=True, pool_type='avg', pool_padding='SAME')
-        # learning_rate=0.1, regularizer=fluid.regularizer.L2Decay(1.0),
         avg_path = fluid.layers.fc(name='cbam_avg_fc1_' + str(index), input=avg_path, size=size, param_attr=ParamAttr(name='fc_share_1_' + str(index),  trainable=True), act='relu')
         avg_path = fluid.layers.fc(name='cbam_avg_fc2_' + str(index), input=avg_path, size=channel, param_attr=ParamAttr(name='fc_share_2_' + str(index), trainable=True), act='relu')
         avg_path = fluid.layers.reshape(x=avg_path, shape=[-1, channel, 1, 1])
